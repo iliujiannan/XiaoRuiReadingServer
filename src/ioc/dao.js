@@ -6,9 +6,9 @@ var ioc = {
                 depose : 'close'
             },
             fields : {
-                url : "jdbc:mysql://127.0.0.1:3306/Gobang?useUnicode=true&characterEncoding=UTF8",
-                username : "root",
-                password : "",
+                url : "jdbc:oracle:thin:@127.0.0.1:1521:zym",
+                username : "xrr",
+                password : "123456",
                 testWhileIdle : true, 
                 validationQuery : "select 1" ,
                 maxActive : 100

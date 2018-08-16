@@ -17,7 +17,7 @@ public class MainSetup implements Setup {
     public void init(NutConfig nutConfig) {
         MainSetup.ioc = nutConfig.getIoc();
         Dao dao = ioc.get(Dao.class);
-        Daos.createTablesInPackage(dao, "com.com.ljn.com.ljn.xiaoruiserver", false);
+        Daos.createTablesInPackage(dao, "com.ljn.xiaoruiserver", false);
     }
 
     @Override

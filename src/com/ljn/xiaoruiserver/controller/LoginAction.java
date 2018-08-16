@@ -1,26 +1,20 @@
 package com.ljn.xiaoruiserver.controller;
 
-
-import com.ljn.xiaoruiserver.bean.User;
-import com.ljn.xiaoruiserver.filter.RequestFilter;
+import com.ljn.xiaoruiserver.bean.Users;
 import com.ljn.xiaoruiserver.util.SecretKey;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.lang.util.NutMap;
-import org.nutz.log.Log;
-import org.nutz.log.Logs;
 import org.nutz.mvc.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
- * Created by 12390 on 2017/9/22.
+ * Created by 23381 on 2018/8/16.
  */
 @IocBean
 public class LoginAction {
-    private Log log = Logs.get();
+
 
     @Inject
     Dao dao;
@@ -29,53 +23,33 @@ public class LoginAction {
     @At("login")
     @GET
     @POST
-    public Object doLogin(@Param("userName")String userName, @Param("psw")String password, @Param("host") String host){
-        HttpServletRequest request = RequestFilter.requests.get();
-        String ip = request.getHeader("x-forwarded-for");
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = request.getHeader("Proxy-Client-IP");
-        }
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = request.getHeader("WL-Proxy-Client-IP");
-        }
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = request.getHeader("HTTP_CLIENT_IP");
-        }
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = request.getHeader("HTTP_X_FORWARDED_FOR");
-        }
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = request.getRemoteAddr();
-        }
-        System.out.println(ip);
+    public Object doLogin(@Param("userPhone")String userPhone, @Param("psw")String password){
         try{
             NutMap re = new NutMap();
-            if(userName!=null&&password!=null) {
-                User u = dao.fetch(User.class, Cnd.where("user_name", "=", userName).and("psw", "=", password));
+            if(userPhone!=null&&password!=null) {
+                Users u = dao.fetch(Users.class, Cnd.where("user_phone", "=", userPhone).and("psw", "=", password));
                 if (u!=null) {
-                    //HttpServletRequest request = RequestFilter.requests.get();
-                    System.out.println(request.getRemoteAddr());
-                    System.out.println(request.getRemoteHost());
                     String secretKey = SecretKey.getSecretKey();
                     u.setSecretKey(secretKey);
-                    u.setHost(host);
                     dao.update(u);
                     re.put("status", 1);
                     re.put("msg", "OK");
                     re.put("secretKey", secretKey);
                     re.put("userId", u.getUserId());
-                    re.put("userName", u.getUserName());
+                    re.put("userPhone", u.getUserPhone());
+                    System.out.println("111");
                 } else {
                     re.put("status", 0);
                     re.put("msg", "账号或密码错误");
+                    System.out.println("222");
                 }
             }else{
                 re.put("status", 0);
                 re.put("msg", "账号或密码错误");
+                System.out.println("333");
             }
             return re;
         }catch (Exception e){
-            log.info(e);
             NutMap re = new NutMap();
             re.put("status", 0);
             re.put("msg", "error in login");

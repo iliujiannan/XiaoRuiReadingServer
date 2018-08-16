@@ -12,9 +12,10 @@ import org.nutz.mvc.ioc.provider.ComboIocProvider;
 
 @SetupBy(value=MainSetup.class)
 @IocBy(type=ComboIocProvider.class, args={"*js", "ioc/",
-        "*anno", "com.com.ljn.com.ljn.xiaoruiserver",
+        "*anno", "com.ljn.xiaoruiserver",
         "*tx",
         "*async"})
+
 @IocBean
 @Modules(scanPackage=true)
 public class Main {
