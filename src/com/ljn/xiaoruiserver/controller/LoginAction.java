@@ -14,8 +14,6 @@ import org.nutz.mvc.annotation.*;
  */
 @IocBean
 public class LoginAction {
-
-
     @Inject
     Dao dao;
     @Ok("json")
@@ -36,17 +34,14 @@ public class LoginAction {
                     re.put("msg", "OK");
                     re.put("secretKey", secretKey);
                     re.put("userId", u.getUserId());
-                    re.put("userPhone", u.getUserPhone());
-                    System.out.println("111");
+//                    re.put("userPhone", u.getUserPhone());
                 } else {
                     re.put("status", 0);
                     re.put("msg", "账号或密码错误");
-                    System.out.println("222");
                 }
             }else{
                 re.put("status", 0);
                 re.put("msg", "账号或密码错误");
-                System.out.println("333");
             }
             return re;
         }catch (Exception e){
@@ -55,7 +50,5 @@ public class LoginAction {
             re.put("msg", "error in login");
             return re;
         }
-
     }
-
 }

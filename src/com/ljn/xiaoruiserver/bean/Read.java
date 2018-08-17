@@ -9,7 +9,7 @@ import org.nutz.dao.entity.annotation.Table;
  */
 
 @Table("xrr_read")
-public class read {
+public class Read {
     @Id
     private Integer readId;
     @Column("user_id")

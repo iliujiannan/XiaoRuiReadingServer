@@ -4,9 +4,7 @@ package com.ljn.xiaoruiserver.util;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/**
- * Created by HeShulin on 2017/5/17.
- */
+
 public class MD5 {
     //单例模式
     static MD5 md5=new MD5();

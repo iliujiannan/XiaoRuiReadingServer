@@ -14,7 +14,7 @@ public class DateUtil {
 
 
     public static String[] weekDays = {"", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"};
-    public static String getDistanceTime(String str1, String str2) {
+    public static String getDistanceTime(String from, String end) {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date one;
         Date two;
@@ -23,8 +23,8 @@ public class DateUtil {
         long min = 0;
         long sec = 0;
         try {
-            one = df.parse(str1);
-            two = df.parse(str2);
+            one = df.parse(from);
+            two = df.parse(end);
             long time1 = one.getTime();
             long time2 = two.getTime();
             long diff;
@@ -50,7 +50,34 @@ public class DateUtil {
             }
         }
     }
-
+    public static long getDistanceTimeInMinute(String from, String end) {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date one;
+        Date two;
+        long day = 0;
+        long hour = 0;
+        long min = 0;
+        long sec = 0;
+        try {
+            one = df.parse(from);
+            two = df.parse(end);
+            long time1 = one.getTime();
+            long time2 = two.getTime();
+            long diff;
+            if (time1 < time2) {
+                diff = time2 - time1;
+            } else {
+                diff = time1 - time2;
+            }
+            day = diff / (24 * 60 * 60 * 1000);
+            hour = (diff / (60 * 60 * 1000) - day * 24);
+            min = ((diff / (60 * 1000)) - day * 24 * 60 - hour * 60);
+            sec = (diff / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return min;
+    }
     public static int compareDate(String DATE1, String DATE2) {
 
 
