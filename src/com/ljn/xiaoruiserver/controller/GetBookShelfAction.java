@@ -9,35 +9,32 @@ import org.nutz.lang.util.NutMap;
 import org.nutz.mvc.annotation.*;
 
 /**
- * Created by 23381 on 2018/8/17.
+ * Created by 23381 on 2018/8/18.
  */
 @IocBean
-public class ModifyPswAction {
+public class GetBookShelfAction {
     @Inject
     Dao dao;
     @Ok("json")
     @Fail("http:500")
-    @At("modify_psw")
+    @At("get_bookshelf")
     @GET
     @POST
-    public Object modifyPsw(@Param("userId") String userId,@Param("psw") String passWord,@Param("newpsw") String newPassWord){
+    public Object getBookshelf(@Param("userId") String userId,@Param("secretKey") String secretKey){
         NutMap re=new NutMap();
-        if(passWord!=null){
+        if(userId!=null&&secretKey!=null){
             Users u=dao.fetch(Users.class, Cnd.where("userId","=",Integer.valueOf(userId)));
-            if(passWord.equals(u.getPsw())){
-                u.setPsw(newPassWord);
-                dao.update(u);
-                re.put("status",1);
-                re.put("msg","修改密码成功！");
+            if(u.getSecretKey().equals(secretKey)){
+
             }
             else {
                 re.put("status",0);
-                re.put("msg","原密码不正确！");
+                re.put("msg","wrong");
             }
         }
         else {
             re.put("status",0);
-            re.put("msg","原密码不能为空！");
+            re.put("msg","您还未登录，请登录！");
         }
         return re;
     }

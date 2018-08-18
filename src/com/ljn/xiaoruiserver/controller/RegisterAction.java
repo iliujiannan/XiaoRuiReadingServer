@@ -1,5 +1,6 @@
 package com.ljn.xiaoruiserver.controller;
 
+import com.ljn.xiaoruiserver.bean.Purse;
 import com.ljn.xiaoruiserver.bean.Users;
 import com.ljn.xiaoruiserver.bean.Checkcode;
 import com.ljn.xiaoruiserver.util.DateUtil;
@@ -40,12 +41,17 @@ public class RegisterAction {
                     user.setUserPhone(userPhone);
                     user.setPsw(password);
                     user.setUserNickName("user_" + userPhone);
-                    user.setUserPhoto("");
+                    user.setUserPhoto("img/sys_photo.jpg");
+                    user.setUserType(0);
+                    user.setUserReadDailly(0);
+                    user.setUserReadTotally(0);
                     dao.insert(user);
+                    Purse p=new Purse();
+                    p.setUserId(user.getUserId());
+                    p.setPurseMoney(0);
+                    dao.insert(p);
                     re.put("status", 1);
                     re.put("msg", "注册成功");
-
-
                 } else {
                     re.put("status", 0);
                     re.put("msg", "两次密码不一致");
@@ -96,7 +102,6 @@ public class RegisterAction {
             re.put("status", 1);
             re.put("msg", "获取验证码成功");
         }
-
         return re;
     }
 }

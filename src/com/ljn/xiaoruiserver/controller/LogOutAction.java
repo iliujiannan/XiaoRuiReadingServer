@@ -20,10 +20,10 @@ public class LogOutAction {
     @At("log_out")
     @GET
     @POST
-    public Object logOut(@Param("userId") Integer userId,@Param("secretKey") String secretKey){
+    public Object logOut(@Param("userId") String userId,@Param("secretKey") String secretKey){
         NutMap re=new NutMap();
         if(secretKey!=null){
-            Users u=dao.fetch(Users.class, Cnd.where("userId","=",userId));
+            Users u=dao.fetch(Users.class, Cnd.where("userId","=",Integer.valueOf(userId)));
             u.setSecretKey("");
             dao.update(u);
             re.put("status",1);
