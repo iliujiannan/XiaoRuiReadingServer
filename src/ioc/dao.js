@@ -7,7 +7,7 @@ var ioc = {
             },
             fields : {
                 url : "jdbc:oracle:thin:@127.0.0.1:1521:zym",
-                username : "xrr",
+                username : "xrreader",
                 password : "123456",
                 testWhileIdle : true, 
                 validationQuery : "select 1" ,

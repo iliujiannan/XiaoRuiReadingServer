@@ -19,6 +19,16 @@ public class BookShelf {
     private Integer buyingState;
     @Column("book_url")
     private String bookUrl;
+    @Column("read_time")
+    private String readTime;
+
+    public String getReadTime() {
+        return readTime;
+    }
+
+    public void setReadTime(String readTime) {
+        this.readTime = readTime;
+    }
 
     public Integer getShelfId() {
         return shelfId;
