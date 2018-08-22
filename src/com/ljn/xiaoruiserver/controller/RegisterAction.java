@@ -79,13 +79,16 @@ public class RegisterAction {
             long dis = DateUtil.getDistanceTimeInMinute(checkcode.getLastTime(), DateUtil.dateToString(new Date()));
             System.out.println(dis);
             if (dis >= 1) {
-//                    code = cc.mSsendMessage(userPhone);
-                code = "2345";
-                checkcode.setCode(code);
-                checkcode.setLastTime(DateUtil.dateToString(new Date()));
-                dao.update(checkcode);
-                re.put("status", 1);
-                re.put("msg", "获取验证码成功");
+                try {
+                    code = cc.mSsendMessage(userPhone);
+                    checkcode.setCode(code);
+                    checkcode.setLastTime(DateUtil.dateToString(new Date()));
+                    dao.update(checkcode);
+                    re.put("status", 1);
+                    re.put("msg", "获取验证码成功");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             } else {
                 re.put("status", 0);
                 re.put("msg", "请不要短时间内重复获取");

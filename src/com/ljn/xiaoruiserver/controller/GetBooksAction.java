@@ -26,9 +26,9 @@ public class GetBooksAction {
         NutMap re=new NutMap();
         List<Books> booksList;
         if(bookLabel.equals("0")){
-            booksList=dao.query(Books.class, Cnd.orderBy());
+            booksList=dao.query(Books.class, Cnd.orderBy().asc("bookId"));
         }else{
-            booksList = dao.query(Books.class, Cnd.where("book_label", "=", bookLabel));
+            booksList = dao.query(Books.class, Cnd.where("book_label", "=", bookLabel).asc("bookId"));
         }
         if(booksList!=null) {
             if(booksList.size()>0) {

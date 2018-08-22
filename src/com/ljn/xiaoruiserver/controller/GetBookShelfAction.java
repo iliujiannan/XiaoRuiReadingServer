@@ -31,7 +31,7 @@ public class GetBookShelfAction {
         NutMap re = new NutMap();
         Users u = dao.fetch(Users.class, Cnd.where("userId", "=", Integer.valueOf(userId)).and("secret_key", "=", secretKey));
         if (u!=null) {
-            List<BookShelf> shelfList=dao.query(BookShelf.class,Cnd.where("user_id","=",Integer.valueOf(userId)));
+            List<BookShelf> shelfList=dao.query(BookShelf.class,Cnd.where("user_id","=",Integer.valueOf(userId)).desc("read_time"));
             if(shelfList!=null){
                 if(shelfList.size()>0) {
                     re.put("status", 1);

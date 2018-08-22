@@ -21,7 +21,7 @@ public class Articles {
     @Column("article_url")
     private String articleUrl;
     @Column("article_reading_amount")
-    private String articleReadingAmount;
+    private Integer articleReadingAmount;
     @Column("article_description")
     private String articleDescription;
 
@@ -65,11 +65,11 @@ public class Articles {
         this.articleUrl = articleUrl;
     }
 
-    public String getArticleReadingAmount() {
+    public Integer getArticleReadingAmount() {
         return articleReadingAmount;
     }
 
-    public void setArticleReadingAmount(String articleReadingAmount) {
+    public void setArticleReadingAmount(Integer articleReadingAmount) {
         this.articleReadingAmount = articleReadingAmount;
     }
 

@@ -34,6 +34,7 @@ public class LoginAction {
                     re.put("msg", "OK");
                     re.put("secretKey", secretKey);
                     re.put("userId", u.getUserId());
+                    re.put("dailyRead",u.getUserReadDailly());
 //                    re.put("userPhone", u.getUserPhone());
                 } else {
                     re.put("status", 0);
